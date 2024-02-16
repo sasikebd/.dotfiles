@@ -2,64 +2,73 @@
 
 local M = {}
 
+local o = vim.o
+local wo = vim.wo
+local cmd = vim.cmd
+local opt = vim.opt
+local opt_local = vim.opt_local
+
 --  General Settings
 function M.Setup()
 
-  vim.o.termguicolors = true    -- Enable termguicolors
-  vim.o.compatible = false      -- Unset Vim compatible mode
-   
+  o.termguicolors = true    -- Enable termguicolors
+  o.compatible = false      -- Unset Vim compatible mode
 
-  --  File related settings
-  vim.cmd("filetype off")       -- Disable file type detection to keep flags for plugins
-  vim.cmd("filetype on")        -- Enable file type detection vim.cmd("filetype plugin on") -- Enable file type plugin
-  vim.cmd("filetype indent on") -- Enable file type indent
-  vim.cmd("syntax on")          -- Enable syntax highlighting
+  --File related settings
+  cmd("filetype off")       -- Disable file type detection to keep flags for plugins
+  cmd("filetype on")        -- Enable file type detection vim.cmd("filetype plugin on") -- Enable file type plugin
+  cmd("filetype indent on") -- Enable file type indent
+  cmd("syntax on")          -- Enable syntax highlighting
 
-  vim.o.autochdir = true        -- Change directory to where the current file lies
-  vim.o.swapfile = false        -- Disable swap file for the current buffer
-  vim.o.autoread = true         -- Auto-detect changes to files outside of Vim
-  vim.o.autoindent = false      -- Enable/disable auto-indentation
-  vim.o.smartindent = false     -- Enable/disable smart indentation
-  vim.o.textwidth = 0           -- Set maximum text width that can be inserted
-  vim.o.wrapmargin = 0          -- Set wrap margin
-  vim.o.background = "dark"     -- Set background to dark
-  vim.o.mousehide = true        -- Hide mouse when typing
-  vim.o.errorbells = false      -- Disable error bell noise
-  vim.o.visualbell = true       -- Disable beep and flash
-  vim.o.ignorecase = true       -- Set ignore case
-  vim.o.number = true           -- Show line numbers
-  vim.o.relativenumber = true   -- Show relative line numbers
-  vim.o.ignorecase = false      -- Disable ignore case
+  o.autochdir = true        -- Change directory to where the current file lies
+  o.swapfile = false        -- Disable swap file for the current buffer
+  o.autoread = true         -- Auto-detect changes to files outside of Vim
+  o.autoindent = false      -- Enable/disable auto-indentation
+  o.smartindent = false     -- Enable/disable smart indentation
+  o.textwidth = 0           -- Set maximum text width that can be inserted
+  o.wrapmargin = 0          -- Set wrap margin
+  o.background = "dark"     -- Set background to dark
+  o.mousehide = true        -- Hide mouse when typing
+  o.errorbells = false      -- Disable error bell noise
+  o.visualbell = true       -- Disable beep and flash
+  o.ignorecase = true       -- Set ignore case
+  o.number = true           -- Show line numbers
+  o.relativenumber = true   -- Show relative line numbers
+  o.ignorecase = false      -- Disable ignore case
 
   --  set tab stop spaces
-  vim.opt.tabstop = 2
-  vim.opt.shiftwidth = 2
-  vim.opt.softtabstop = 2
-  vim.opt.expandtab = true      -- tab chars replaces with spaces
-  vim.opt.clipboard = "unnamedplus"
+  opt.tabstop = 2           -- No of spaces chars per tabstop 
+  opt.shiftwidth = 2        -- Spaces for indentation level
+  opt.softtabstop = 2       -- No of spaces that a One Tab char counts for
+  opt.expandtab = true      -- Tab chars replaces with spaces
+
+  opt.clipboard = "unnamedplus"
 
   -- use system clipboard
-  vim.opt.showmatch = true
-  vim.opt.ttyfast = true
-  vim.opt.hlsearch = true
-  
+  opt.showmatch = true
+  opt.ttyfast = true
+  opt.hlsearch = true
+
+  --[[ window scoped settings ]]--
   --  Enable line numbers
-  vim.wo.number = true
-  vim.wo.rnu = true
+  wo.number = true
+  wo.rnu = true
 
-  if _G.PACKER_INIT_FIRST_TIME then
-    vim.cmd("colorscheme desert")
+
+  --wo.foldmethod = 'indent'  --  Set the folding method to 'indent'
+  --wo.foldlevel = 2          --  Set the fold level to a specific value
+  --wo.foldcolumn = '1'       --  Enable fold column
+
+  opt_local.foldenable = false
+
+  o.redrawtime = 1000	-- Set Redraw time
+
+  -- set colorscheme
+  if _G.PACKER_INITIAL_INSTALLATION then
+    cmd("colorscheme desert")
   else
-    vim.cmd("colorscheme codedark")
+    cmd("colorscheme codedark")
   end
-
-  --vim.wo.foldmethod = 'indent'  --  Set the folding method to 'indent'
-  --vim.wo.foldlevel = 2          --  Set the fold level to a specific value
-  --vim.wo.foldcolumn = '1'       --  Enable fold column
-
-  vim.opt_local.foldenable = false
-
-  vim.o.redrawtime = 1000	-- Set Redraw time
 
 end
 
