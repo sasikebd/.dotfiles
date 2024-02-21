@@ -1,0 +1,3 @@
+#ignore the .dotifiles directory itself
+#as this is a --bare repository for manage dotfiles
+~/.dotfiles
