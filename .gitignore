@@ -2,19 +2,19 @@
 *
 
 # but not the gitignore file
-!~/.gitignore
+!.gitignore
 
 # but not .config directory
-!~/.config/
+!.config/
 
 # but not  bash related configuration
-!~/.bashrc.d/
-!~/.bashrc
-!~/.bash_profile
+!.bashrc.d/
+!.bashrc
+!.bash_profile
 
 # but not the nvim configuration 
-!~/.config/nvim_sbd
+!.config/nvim_sbd
 
 # but not tmux.conf
-!~/.tmux/tmux.conf
+!.tmux/tmux.conf
 
