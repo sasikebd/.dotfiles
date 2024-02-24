@@ -8,8 +8,9 @@
 !~/.config/
 
 # but not  bash related configuration
-!~/.bashrc.d
+!~/.bashrc.d/
 !~/.bashrc
+!~/.bash_profile
 
 # but not the nvim configuration 
 !~/.config/nvim_sbd
