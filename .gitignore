@@ -1,3 +1,20 @@
-#ignore the .dotifiles directory itself
-#as this is a --bare repository for manage dotfiles
-~/.dotfiles
+# #ignore everything
+*
+
+# but not the gitignore file
+!.gitignore
+
+# but not .config directory
+!.config/
+
+# but not  bash related configuration
+!.bashrc.d/
+!.bashrc
+!.bash_profile
+
+# but not the nvim configuration 
+!.config/nvim_sbd
+
+# but not tmux.conf
+!.tmux/tmux.conf
+
