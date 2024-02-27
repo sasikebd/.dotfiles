@@ -21,7 +21,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="/home/sasike/neovim/bin:$PATH"
-
-alias dotGit='/usr/bin/git --git-dir=/home/sasike/.dotfiles/ --work-tree=/home/sasike'
-export PATH="/home/sasike/.nvim/bin:$PATH"
+export PATH="/bin:$PATH"
