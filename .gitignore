@@ -12,9 +12,13 @@
 !.bashrc
 !.bash_profile
 
+# but not bash prompt themes
+!.bandas_bash/
+
 # but not the nvim configuration 
 !.config/nvim_sbd
 
 # but not tmux.conf
 !.tmux/tmux.conf
+
 
