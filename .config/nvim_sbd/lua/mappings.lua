@@ -84,6 +84,10 @@ function M.Setup()
   vim.api.nvim_set_keymap('n', '<leader>tt6', [[:%s/^/DD/g<left><left>]], { noremap = true })
   vim.api.nvim_set_keymap('v', '<leader>tt6', [[:s/^/DD/g<left><left>]], { noremap = true })
 
+  -- Replace first char in line with "SBDDEL"
+  vim.api.nvim_set_keymap('n', '<leader>ttt', [[:s/$/\t#SBDDEL/g<left><left>]], { noremap = true })
+  vim.api.nvim_set_keymap('v', '<leader>ttt', [[:s/$/\t#SBDDEL/g<left><left>]], { noremap = true })
+
   -- Replace left
   vim.api.nvim_set_keymap('n', '<leader>11', [[:%s/\v(.*)(<C-r><C-w>)(.*)/\1/<left><left>]], { noremap = true })
 

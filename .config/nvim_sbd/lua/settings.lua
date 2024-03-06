@@ -30,7 +30,7 @@ function M.Setup()
   o.background = "dark"     -- Set background to dark
   o.mousehide = true        -- Hide mouse when typing
   o.errorbells = false      -- Disable error bell noise
-  o.visualbell = true       -- Disable beep and flash
+  o.visualbell = false      -- Disable beep and flash
   o.ignorecase = true       -- Set ignore case
   o.number = true           -- Show line numbers
   o.relativenumber = true   -- Show relative line numbers
@@ -49,11 +49,13 @@ function M.Setup()
   opt.ttyfast = true
   opt.hlsearch = true
 
-  --[[ window scoped settings ]]--
+  -- cursorline setup
+  opt.cursorline = true
+
+   --[[ window scoped settings ]]--
   --  Enable line numbers
   wo.number = true
   wo.rnu = true
-
 
   --wo.foldmethod = 'indent'  --  Set the folding method to 'indent'
   --wo.foldlevel = 2          --  Set the fold level to a specific value

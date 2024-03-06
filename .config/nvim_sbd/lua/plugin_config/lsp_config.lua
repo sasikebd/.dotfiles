@@ -5,8 +5,7 @@ M.FLAG_INCLUDE = true
 M.Setup = function()
 
   if M.FLAG_INCLUDE then
-    --require'lspconfig'.pyright.setup{}
-    --
+
     -- setup mason here 
     require("mason").setup()
 
