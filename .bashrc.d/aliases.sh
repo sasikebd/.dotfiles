@@ -1,18 +1,29 @@
 #!/bin/bash
-
 # User specific aliases 
-# Custom aliases
+
+#ls
 alias ll='ls -alF'
+
+#chmod
+alias chux='chmod u+x'
+alias ch000='chmod 000'
+alias ch640='chmod 640'
+alias ch644='chmod 644'
+alias ch755='chmod 755'
+alias ch777='chmod 775'
+
+#git
 alias gs='git status'
 alias gc='git commit'
 alias gp='git push'
 alias gco='git checkout'
-alias dotGit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # grep 
 alias grep='grep --color=auto'
 
 # Go to project directory
+alias cdh='cd ~/'
 alias cddown='cd ~/Downloads'
 alias cdwork='cd ~/work/'
 alias cdgit='cd ~/work/01_git'
