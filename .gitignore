@@ -1,4 +1,4 @@
-# #ignore everything
+# #ignore everything 
 *
 
 # but not the gitignore file
@@ -20,5 +20,3 @@
 
 # but not tmux.conf
 !.tmux/tmux.conf
-
-
