@@ -1,119 +1,221 @@
 #!/bin/bash
 
-# Define color variables
+source $HOME/.bandas_bash/prompt_themes.sh
+
+## prompt color theme
+declare -A P_THEME
+
+#color reset
 COLOR_RESET='\e[0m'
-COLOR_BOLD='\e[1m'
-COLOR_ITALIC='\e[3m'
-COLOR_DIM='e[1m'
-COLOR_RED='\e[31m'
-COLOR_GREEN='\e[32m'
-COLOR_YELLOW='\e[33m'
-COLOR_BLUE='\e[34m'
 
-# foreground + background colors
-F_LIGHTCYAN_B_DARKBLUE="\e[96;44m"
-F_LIGHTBLUE_B_DARDKCYAN="\033[94;46m"
+#apply color theme
+#currently expect theme has followed the protocol
+#if not it is error prone
+for key in "${!THEME_KALAWEWA[@]}"; do
+  P_THEME["$key"]="${THEME_KALAWEWA["$key"]}"
+done
 
-F_RED_B_BLACK="\e[31;40m"
-F_GREEN_B_BLACK="\e[32;40m"
-F_YELLOW_B_BLACK="\e[33;40m"
-F_CYAN_B_BLACK="\e[33;40m"
-F_ORANGE_B_BLACK="\e[38;5;208m"
+# Define color variables
+BG_PREFIX="\[\e[48;5;"
+FG_PREFIX="\[\e[38;5;"
+COL_POSTFIX="m\]"
 
-F_WHITE_B_BLUE="\e[37;44m"
-F_WHITE_B_CYAN="\e[37;46m"
-F_WHITE_B_MAGENTA="\e[97;45m"
-F_WHITE_B_RED="\e[97;41m"
-F_WHITE_B_GREEN="\e[37;42m"
-F_WHITE_B_YELLOW="\e[97;43m"
+#ASCII BOX CHARS
+top_left="┌"
+top_right="┐"
+bottom_left="└"
+bottom_right="┘"
+horizontal="─"
+vertical="│"
+seperator=$vertical
 
-## Function to get Git status
-function git_status_ {
-    local status
-    status=$(git status 2>/dev/null)
-    if [[ $? -eq 0 ]]; then
-        if [[ -n $(git status -s) ]]; then
-            echo " ⚡ Untracked changes" # Untracked changes
-        elif [[ -n $(git diff --cached) ]]; then
-            echo " ✔" # Changes staged for commit
-        elif [[ -n $(git ls-files --other --exclude-standard) ]]; then
-            echo " ✚" # Untracked files
-        elif [[ -n $(git diff) ]]; then
-            echo " ✱" # Changes not staged for commit
-        elif [[ -n $(git log --branches --not --remotes) ]]; then
-            echo " ⬆" # Changes ahead of remote
-        elif [[ -n $(git log --remotes --not --branches) ]]; then
-            echo " ⬇" # Changes behind remote
-        else
-    :        echo "✓" # Clean repository
-        fi
-    else
-        echo "" # Not a Git repository
-    fi
+#background color set 
+function BG()
+{
+  local _color="$1"
+  local _out_color="${BG_PREFIX}${_color}${COL_POSTFIX}"
+  echo -e "${_out_color}" 
 }
 
+#foreground color set
+function FG()
+{
+  local _color="$1"
+  local _out_color="${FG_PREFIX}${_color}${COL_POSTFIX}"
+  echo -e "${_out_color}" 
+}
+
+#foreground + background set
+function BG_FG()
+{ 
+  local _color_bg="$1"
+  local _color_fg="$2"
+  local _out_color=$(BG $_color_bg)$(FG $_color_fg)
+  echo -e "${_out_color}" 
+}
 
 # Function to get Git branch name
-function git_branch {
+function git_branch()
+{
     local branch_name
     if [ "$PWD" = "$HOME" ]; then
       # my home is the work dir of --bare .dotfiles git repo
-      branch_name=$(dotgit branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
+      branch_name=$(dgit branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
     else
       branch_name=$(git branch 2>/dev/null | sed -n '/^\*/s/^\* //p')
     fi
-    [[ -n "$branch_name" ]] && echo "$F_RED_B_BLACK [$branch_name]" 
+    [[ -n "$branch_name" ]] && echo "[$branch_name]" 
 }
 
 # Function to get Git status
-function git_status {
+function git_status()
+{
     local status
     if [ "$PWD" = "$HOME" ]; then
       # my home is the work dir of --bare .dotfiles git repo
-      status="$(dotgit status --porcelain  2>/dev/null)"
+      status="$(dgit status --porcelain  2>/dev/null)"
     else
       status="$(git status --porcelain  2>/dev/null)"
     fi
 
     if [[ $? -eq 0 ]]; then
       case "$status" in 
-        '')   echo -e "$F_GREEN_B_BLACK✅";; # Clean repository
-        *?)   echo -e "$F_YELLOW_B_BLACK⚡";; # Untracked changes
-        M*)   echo -e "$F_RED_B_BLACK✱ ★";; # Changes not staged for commit
-        ??*)  echo -e "$F_ORANGE_B_BLACK✔"$;;# Changes staged for commit
-        M*A*) echo -e "$F_WHITE_B_YELLOW✚";; # Untracked and unstaged changes 
-        ??*)  echo -e "$F_WHITE_B_YELLOW✱";; # Changes not staged for commit
-        '*')  echo -e "$F_WHITE_B_YELLOW⚡";; # Other Untracked changes
-        M*)   echo -e "$F_WHITE_B_YELLOW✱";; # Changes not staged for commit
-        U*)   echo -e "$F_WHITE_B_YELLOW⬆";; # Changes ahead of remote
-        D*)   echo -e "$F_WHITE_B_YELLOW⬇";;# Changes behind remote
+        '')   echo -e "$(FG ${P_THEME[COL_GIT_CLEAN]})✅";;              # Clean repository
+        *?)   echo -e "$(FG ${P_THEME[COL_GIT_CHANGED]})⚡";;            # Untracked changes
+        M*)   echo -e "$(FG ${P_THEME[COL_GIT_CHANGED]})✱★";;            # Changes not staged for commit
+        ??*)  echo -e "$(FG ${P_THEME[COL_GIT_STAGED]})✔"$;;             # Changes staged for commit
+        M*A*) echo -e "$(FG ${P_THEME[COL_GIT_UNSTAGED_UNTRACKED]})✚";;  # Untracked and unstaged changes
+        ??*)  echo -e "$(FG ${P_THEME[COL_GIT_CHANGED]})✱";;             # Changes not staged for commit
+        '*')  echo -e "$(FG ${P_THEME[COL_GIT_UNSTAGED_UNTRACKED]})⚡";; # Other Untracked changes
+        U*)   echo -e "$(FG ${P_THEME[COL_GIT_AHEAD]})▲";;               # Changes ahead of remote
+        D*)   echo -e "$(FG ${P_THEME[COL_GIT_BEHIND]})▼";;              # Changes behind remote
       esac
     else
         echo "" # Not a Git repository
     fi
 }
 
-##configure left block of the prompt
-function set_left_block(){
-
-  echo -e "TODO \n "
-
-}
-
-#configure right block of the prompt
-function set_right_block()
+#sets gradient background between 
+#two colors for given text
+# $1 = textToGradient
+# $2 = start background color
+# $3 = end background color
+# $4 = foreground color
+function text_colorize_gradient_bg() 
 {
-  echo -e "ToODO\n "
+  local text=$1            # text to colorize
+
+  local start_color=0;     # start color
+  local end_color=255;     # end color
+
+  if [[ $3 -gt $2 ]]; then 
+    start_color=$2      
+    end_color=$3        
+  else
+    start_color=$3      
+    end_color=$2        
+  fi
+
+  local foreground_color=$4 # foreground color
+  local length=${#text}
+  local output=""
+  local step=$((( end_color - start_color)/ length ))
+  local color=$start_color
+  local dispText="$text"
+
+  if [[ $length -eq 0 ]]; then 
+    length=1
+  fi
+
+  if [[ $step -eq 0 ]]; then 
+    step=1
+  fi  
+
+  for(( i=0; i<$length; i++ )); do
+    local char="${dispText:$i:1}"
+    local tempColor=$(( color + step ))
+    if [[ tempColor -ge $end_color  ]]; then 
+      color=$end_color
+    else
+      color=$tempColor
+    fi 
+
+    local current_color="$(BG_FG $color $foreground_color)"
+    output="${output}${current_color}${char}"	
+  done
+
+  output+=${COLOR_RESET}
+  echo -e ${output}
 }
 
+# color protocol for theming of the prompt
+# p.s-> A /B stands for COL_A , COL_B naming 
+# p.s-> C-D stands for gradient color range
+# --------------------------Line_1----------------------------------------------
+# ______________________________________________________________________________
+# Info      | ┌user@hostname  |▶| workdir | git branch | git status     | time 
+# ______________________________________________________________________________
+# background|  A              |C|   C-D   |  E         |  E             |   A 
+# foreground|  B              |A|   B     |  F         |  G             |   B
+# ______________________________________________________________________________
 #
-# update the prompt
+# --------------------------Line_2----------------------------------------------
+# Info      | └-➤$   
+# foreground|  A 
+# background|  B 
+# ______________________________________________________________________________
+#
+#######################################################################
+
+function left_block()
+{
+  local user_at_host="$USER@$HOSTNAME"
+  local work_dir="$PWD"
+
+  local p1_userhost="$(BG_FG ${P_THEME[COL_A]} ${P_THEME[COL_B]})$user_at_host"
+  local p2_seperator="$(BG_FG ${P_THEME[COL_C]} ${P_THEME[COL_A]})$seperator"
+  local p3_workdir=$(text_colorize_gradient_bg $work_dir ${P_THEME[COL_C]} ${P_THEME[COL_D]} ${P_THEME[COL_B]})
+
+  echo -e "${top_left}${p1_userhost}${p2_seperator}${p3_workdir}${COLOR_RESET}"	
+}
+
+function middle_block()
+{
+  echo -e "$(BG_FG ${P_THEME[COL_E]} ${P_THEME[COL_F]})$(git_branch)$(BG_FG ${P_THEME[COL_E]} ${P_THEME[COL_G]})$(git_status)${COLOR_RESET}"
+}
+
+function right_block()
+{
+  local time_disp="$(BG_FG ${P_THEME[COL_A]} ${P_THEME[COL_B]})⌚$(date +%H:%M)${COLOR_RESET}"
+  echo -e "${time_disp}$(FG ${P_THEME[COL_B]})\n${bottom_left}${horizontal}\$${COLOR_RESET}"
+}
+
 function update_prompt() 
 {
-  #PS1="${F_WHITE_B_BLUE}\u@\h ${F_LIGHTCYAN_B_DARKBLUE}\w${F_WHITE_B_RED}$(git_branch)${F_YELLOW_B_BLACK}$(git_status)${F_YELLOW_B_BLACK}\n➤➤ \$ ${COLOR_RESET}"
-  #PS1="${F_WHITE_B_BLUE}\u@\h ${F_LIGHTCYAN_B_DARKBLUE}\w${F_WHITE_B_RED}$(git_branch)${COLOR_RESET}$(git_status)${F_YELLOW_B_BLACK}\n➤➤ \$ ${COLOR_RESET}"
-  PS1="${B_CYAN}\u@\h ${F_LIGHTCYAN_B_DARKBLUE}\w${F_WHITE_B_RED}$(git_branch)${COLOR_RESET}$(git_status)${F_YELLOW_B_BLACK}\n➤➤ \$ ${COLOR_RESET}"
+  PS1="$(left_block)$(middle_block)$(right_block)"
 }
 
-# refresh prompt and set prompt
+# main  routine
+# -----------------
+#set terminal type specifics
+case "$TERM" in 
+  xterm|rxvt*)
+    #simple terminal for xterm/rxvt
+     seperator="➤"
+     ;;
+  xterm-256color)
+     seperator="▶"
+    #gnome-terminal, put more info
+    ;;
+  gnome*)
+     seperator="▶"
+    #gnome-terminal, put more info
+    ;;
+  *)
+    #for other prompt set basic prompt
+    seperator=""
+    ;;
+esac
+
+# below set the refresh capable :)
 PROMPT_COMMAND="update_prompt" 
