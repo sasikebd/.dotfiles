@@ -34,6 +34,7 @@ alias cdlocal='cd ~/.local/'
 alias cdshare='cd ~/.local/share'
 alias cdlocalnvim='cd ~/.local/share/nvim_sbd'
 alias cdnvim='cd ~/.config/nvim_sbd/'
+alias cdtmux='cd ~/.tmux/'
 
 #other open commands
 alias initlua='nvim ~/.config/nvim_sbd/init.lua'
@@ -41,12 +42,20 @@ alias bashrc='nvim ~/.bashrc'
 alias bashd='nvim ~/.bashrc.d'
 alias alses='nvim ~/.bashrc.d/aliases.sh'
 alias btips='nvim ~/work/btips.sh'
+alias todos='nvim ~/.work/todos.txt'
 
 #clear 
 alias clr='clear'
 
 #source ~/.bashrc
 alias ssbash='source ~/.bashrc'
+
+#tmux
+alias ntux='nvim ~/.tmux/tmux.conf'
+alias tdh='tmux detach'
+alias tls='tmux ls'
+alias tks='tmux kill-session "$@"'
+alias tksa='tmux kill-session -a'
 
 # Start development server
 alias devserver='cd ~/Projects/myapp && npm start'
