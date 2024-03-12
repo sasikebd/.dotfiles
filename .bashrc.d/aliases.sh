@@ -3,6 +3,7 @@
 
 #ls
 alias ll='ls -alF'
+alias lsd='ls -d */'
 
 #chmod
 alias chux='chmod u+x'
@@ -21,6 +22,8 @@ alias dgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # grep 
 alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 # Go to project directory
 alias cdh='cd ~/'
@@ -42,7 +45,7 @@ alias bashrc='nvim ~/.bashrc'
 alias bashd='nvim ~/.bashrc.d'
 alias alses='nvim ~/.bashrc.d/aliases.sh'
 alias btips='nvim ~/work/btips.sh'
-alias todos='nvim ~/.work/todos.txt'
+alias todos='nvim ~/work/todos.txt'
 
 #clear 
 alias clr='clear'

@@ -1,31 +1,36 @@
 #!/bin/bash
 
 # Custom function to create a new directory and navigate to it
-function mkcd() {
+function mkcd()
+{
     mkdir -p "$1" && cd "$1"
 }
 
 # Custom function to count the number of files in a directory
-function file_count() {
+function file_count() 
+{
     local dir=$1
     local count=$(ls -1 "$dir" | wc -l)
     echo "Total files in $dir: $count"
 }
 
 #custom functions
-gclone() {
+function gclone() 
+{
     git clone https://github.com/$1.git
 }
 
 #create file 
-createfile() {
+function createfile() 
+{
     touch $1
     echo "# $1" >> $1
     echo "Created by: $USER" >> $1
 }
 
 # Function to add a Neovim configuration folder to the NVIM_CONFIGS array
-add_nvim_config() {
+function add_nvim_config() 
+{
   if [ -z "$1" ]; then
     echo "Empty : Operation canceled"
     return
@@ -39,7 +44,8 @@ add_nvim_config() {
 }
 
 # Function to remove a Neovim configuration folder from the NVIM_CONFIGS array
-remove_nvim_config() {
+function remove_nvim_config() 
+{
   echo "Available Neovim Configurations to Remove:"
   for i in "${!NVIM_CONFIGS[@]}"; do
     echo "$(($i + 1)). ${NVIM_CONFIGS[$i]}"
@@ -84,7 +90,8 @@ remove_nvim_config() {
   fi
 }
 
-print_nvim_configs(){
+function print_nvim_configs()
+{
   echo "Available Neovim Configurations:"
   for i in "${!NVIM_CONFIGS[@]}"; do
     echo "${NVIM_CONFIGS[$i]}"
@@ -93,7 +100,7 @@ print_nvim_configs(){
 
 # Function to show available Neovim configurations and set the chosen configuration
 # switch nvim configuration
-swnvim() 
+function swnvim() 
 {
   echo "Available Neovim Configurations:"
   for i in "${!NVIM_CONFIGS[@]}"; do
@@ -130,7 +137,7 @@ swnvim()
 }
 
 #set given nvim config to init state by clearing plugins
-init_nvim_config()
+function init_nvim_config()
 {
   echo "Available Neovim Configurations:"
   for i in "${!NVIM_CONFIGS[@]}"; do
@@ -167,4 +174,32 @@ init_nvim_config()
   fi 
 }
 
+# open tmux with my general window/pane setup
+function tux()
+{
+
+  # window 1
+  tmux new-session -d -s dev_s -n nvim_max
+
+    # split the window in to multiple panes and start nvim in one
+    tmux send-keys -t dev_s:nvim_max.0 'nvim' Enter
+
+    #split pane horizontally and run another command in the new pane
+    tmux split-window -h -t dev:nvim_max
+    tmux send-keys -t dev_s:nvim_max.1 'cdtmux' Enter
+
+  # window 2
+  tmux new-window -t dev_s -n py
+    #split the window horizontally
+    tmux split-window -h -t dev_s:py
+    tmux send-keys -t dev_s:py.0 'cdprog;nvim' Enter
+  #  #split right pane to have two vertical panes
+    #tmux split-window -v -t dev_s:py
+    tmux send-keys -t dev_s:py.1 'cdgit' Enter
+
+    #tmux split-window -v -t dev_s:py
+
+  ##attach to the session 
+  tmux attach-session -t dev_s
+}
 

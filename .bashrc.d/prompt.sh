@@ -176,7 +176,7 @@ function left_block()
   local p2_seperator="$(BG_FG ${P_THEME[COL_C]} ${P_THEME[COL_A]})$seperator"
   local p3_workdir=$(text_colorize_gradient_bg $work_dir ${P_THEME[COL_C]} ${P_THEME[COL_D]} ${P_THEME[COL_B]})
 
-  echo -e "${top_left}${p1_userhost}${p2_seperator}${p3_workdir}${COLOR_RESET}"	
+  echo -e "\n${top_left}${p1_userhost}${p2_seperator}${p3_workdir}${COLOR_RESET}"	
 }
 
 function middle_block()
