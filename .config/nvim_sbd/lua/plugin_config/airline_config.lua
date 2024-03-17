@@ -23,7 +23,6 @@ M.Setup = function()
     -- buffer numbersing enable
     vim.g.airline_extensions_tabline_buffer_idx_mode = 1
 
-    LogMessageOther("Loading : Done")
   end
 end
 

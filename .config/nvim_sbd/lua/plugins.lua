@@ -51,7 +51,7 @@ function M.Setup()
     use("scrooloose/nerdtree")
     use("vim-scripts/mru.vim")
     use {
-      'nvim-telescope/telescope.nvim', tag = '0.1.5',
+      'nvim-telescope/telescope.nvim', tag = '0.1.6',
       requires = { {'nvim-lua/plenary.nvim'} }
     }
 
@@ -60,11 +60,12 @@ function M.Setup()
     use("godlygeek/tabular")
     use("chrisbra/csv.vim")
     use("tpope/vim-repeat")
+    use("jiangmiao/auto-pairs")
     --use("tpope/vim-sleuth") -- detects tabstop & shiftwidth automaticallay
 
     -- git related plugins--
-    -- use("mhinz/vim-signify")
     use("tpope/vim-fugitive")
+    use("lewis6991/gitsigns.nvim")
     use("airblade/vim-gitgutter")
 
     -- treesitter
@@ -85,11 +86,11 @@ function M.Setup()
                     -- Neovim setup for init.lua and plugin development with full signature help,]]
                     -- docs and completion for the nvim lua API.]]
                     "folke/neodev.nvim",
-                    {
-                            "j-hui/fidget.nvim",
-                            tag = "legacy",
-                            opts = {},
-                    },
+                   --[[ {]]
+                            --[["j-hui/fidget.nvim",]]
+                            --[[tag = "legacy",]]
+                            --[[opts = {},]]
+                    --[[},]]
             },
     })
 

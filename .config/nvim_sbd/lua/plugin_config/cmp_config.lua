@@ -25,8 +25,6 @@ M.Setup = function()
       }),
 
     })
-
-    LogMessageOther("Loading : Done")
   end
 end
 

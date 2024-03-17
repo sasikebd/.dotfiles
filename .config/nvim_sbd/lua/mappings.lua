@@ -11,6 +11,7 @@ function M.Setup()
 
   -- Mapping to reload Neovim configuration
   --vim.api.nvim_set_keymap('n', '<leader>ld', ':lua ReloadNeoVim()<CR>', { noremap = true })
+  vim.api.nvim_set_keymap('n', '<leader>ld', ':luafile $MYVIMRC<CR>', { noremap = true })
 
   -- NETRW Explorer --
   vim.keymap.set('n', '<leader>33', '<cmd>Explore<cr>', { noremap = true })
@@ -119,8 +120,21 @@ function M.Setup()
   vim.api.nvim_set_keymap('n', '<leader>tjk', [[:%v/^<C-r><C-w>/-1j!]], { noremap = true })
   vim.api.nvim_set_keymap('v', '<leader>tjk', [[:v/^<C-r><C-w>/-1j!]], { noremap = true })
 
+  -- clip board copy paste
+  vim.api.nvim_set_keymap('n', '<leader>y', '"+y"', { noremap = true ,silent = true})
+  vim.api.nvim_set_keymap('v', '<leader>p', '"+p"', { noremap = true ,silent = true})
+
   --#endregion  Text_Editing_Mappings
  
+  --gitsigns related mappings
+  vim.api.nvim_set_keymap('n', '<leader>gp', ":Gitsigns preview_hunk<CR>",{ noremap = true ,silent = true})
+  vim.api.nvim_set_keymap('v', '<leader>gp', ":Gitsigns preview_hunk<CR>",{ noremap = true ,silent = true})
+
+  vim.api.nvim_set_keymap('n', '<leader>gt', ":Gitsigns toggle_current_line_blame<CR>",{ noremap = true ,silent = true})
+  vim.api.nvim_set_keymap('v', '<leader>gt', ":Gitsigns toggle_current_line_blame<CR>",{ noremap = true ,silent = true})
+
+  vim.api.nvim_set_keymap('n', '<leader>gf', ":Gitsigns diffthis<CR>",{ noremap = true ,silent = true})
+  vim.api.nvim_set_keymap('v', '<leader>gf', ":Gitsigns diffthis<CR>",{ noremap = true ,silent = true})
 end
 
 return M

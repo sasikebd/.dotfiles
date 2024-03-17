@@ -4,6 +4,10 @@
 #ls
 alias ll='ls -alF'
 alias lsd='ls -d */'
+alias ldh='ls -d1'
+
+#clear
+alias cls='clear'
 
 #chmod
 alias chux='chmod u+x'
@@ -11,7 +15,7 @@ alias ch000='chmod 000'
 alias ch640='chmod 640'
 alias ch644='chmod 644'
 alias ch755='chmod 755'
-alias ch777='chmod 775'
+alias ch777='chmod 777'
 
 #git
 alias gs='git status'
@@ -19,6 +23,7 @@ alias gc='git commit'
 alias gp='git push'
 alias gco='git checkout'
 alias dgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias gclone='git clone'
 
 # grep 
 alias grep='grep --color=auto'
@@ -70,7 +75,6 @@ alias dcrm='docker rm $(docker ps -aq)'
 alias dcrmimg='docker rmi $(docker images -q)'
 
 # File search
-#alias ffind='find . -name'
 #search from /
 alias findfr='sudo find / -type f -name'
 alias finddr='sudo find / -type d -name'

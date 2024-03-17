@@ -42,9 +42,22 @@ function M.Setup()
   opt.softtabstop = 2       -- No of spaces that a One Tab char counts for
   opt.expandtab = true      -- Tab chars replaces with spaces
 
+  -- setup clipboard provider
   opt.clipboard = "unnamedplus"
+  --[[vim.g.clipboard = {]]
+     --[[name = 'xclip',]]
+     --[[copy = {]]
+       --[[['+']='xclip -selection clipboard -i',]]
+       --[[['*']='xclip -selection primary -i']]
+     --[[},]]
+     --[[pase = {]]
+       --[[['+']='xclip -selection clipboard -o',]]
+       --[[['*']='xclip -selection primary -o']]
+     --[[},]]
+     --[[cache_enabled = 0]]
 
-  -- use system clipboard
+   --[[}]]
+
   opt.showmatch = true
   opt.ttyfast = true
   opt.hlsearch = true

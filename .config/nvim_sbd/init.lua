@@ -10,15 +10,13 @@ _G.PACKER_INITIAL_INSTALLATION = false -- Set this flag if packer install for th
 _G.PACKER_COMPLETED = false            -- set this flag after packer install/sync completed
 
 -- Initialize the bootstrap
---local bootstrap = require("bootstrap"):new()
 local bootstrap = require("bootstrap")
-
-
 local success, err = pcall(bootstrap.Setup)
+
 if not success then
   vim.api.nvim_err_writeln("Error in calling bootstrap : " .. err)
 end
 
 -- Display startup time using util.lua
 local util = require("util")
- vim.schedule(util.Display_startup_time)
+  vim.schedule(util.Display_startup_time)

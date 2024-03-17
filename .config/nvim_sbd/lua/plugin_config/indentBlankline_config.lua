@@ -1,6 +1,6 @@
 local M = {}
 
-M.FLAG_INCLUDE = true
+M.FLAG_INCLUDE = true 
 M.INDENT_MULTICOLOR = false 
 
 M.Setup = function()

@@ -182,11 +182,11 @@ function tux()
   tmux new-session -d -s dev_s -n nvim_max
 
     # split the window in to multiple panes and start nvim in one
-    tmux send-keys -t dev_s:nvim_max.0 'nvim' Enter
+    tmux send-keys -t dev_s:nvim_max.0 'initlua' Enter
 
     #split pane horizontally and run another command in the new pane
     tmux split-window -h -t dev:nvim_max
-    tmux send-keys -t dev_s:nvim_max.1 'cdtmux' Enter
+    tmux send-keys -t dev_s:nvim_max.1 'cdnvim' Enter
 
   # window 2
   tmux new-window -t dev_s -n py

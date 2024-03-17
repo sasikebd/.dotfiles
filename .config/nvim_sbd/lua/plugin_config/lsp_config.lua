@@ -38,23 +38,23 @@ M.Setup = function()
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     ----SBDDEL_S
-    capabilities.textDocument.completion.completionItem = {
-        documentationFormat = { "markdown", "plaintext" },
-        snippetSupport = true,
-        preselectSupport = true,
-        insertReplaceSupport = true,
-        labelDetailsSupport = true,
-        deprecatedSupport = true,
-        commitCharactersSupport = true,
-        tagSupport = { valueSet = { 1 } },
-        resolveSupport = {
-          properties = {
-            "documentation",
-            "detail",
-            "additionalTextEdits",
-          },
-        },
-      }
+--[[    capabilities.textDocument.completion.completionItem = {]]
+        --[[documentationFormat = { "markdown", "plaintext" },]]
+        --[[snippetSupport = true,]]
+        --[[preselectSupport = true,]]
+        --[[insertReplaceSupport = true,]]
+        --[[labelDetailsSupport = true,]]
+        --[[deprecatedSupport = true,]]
+        --[[commitCharactersSupport = true,]]
+        --[[tagSupport = { valueSet = { 1 } },]]
+        --[[resolveSupport = {]]
+          --[[properties = {]]
+            --[["documentation",]]
+            --[["detail",]]
+            --[["additionalTextEdits",]]
+          --[[},]]
+        --[[},]]
+      --[[}]]
 
     ----SBDDEL_E
 
