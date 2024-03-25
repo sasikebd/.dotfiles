@@ -46,6 +46,7 @@ alias bashd='nvim ~/.bashrc.d'
 alias alses='nvim ~/.bashrc.d/aliases.sh'
 alias btips='nvim ~/work/btips.sh'
 alias todos='nvim ~/work/todos.txt'
+alias funcs='nvim ~/.bashrc.d/functions.sh'
 
 #clear 
 alias clr='clear'

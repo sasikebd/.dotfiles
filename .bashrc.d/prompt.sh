@@ -160,7 +160,7 @@ function text_colorize_gradient_bg()
 # ______________________________________________________________________________
 #
 # --------------------------Line_2----------------------------------------------
-# Info      | └-➤$   
+# Info      | └-➤   
 # foreground|  A 
 # background|  B 
 # ______________________________________________________________________________
@@ -176,7 +176,7 @@ function left_block()
   local p2_seperator="$(BG_FG ${P_THEME[COL_C]} ${P_THEME[COL_A]})$seperator"
   local p3_workdir=$(text_colorize_gradient_bg $work_dir ${P_THEME[COL_C]} ${P_THEME[COL_D]} ${P_THEME[COL_B]})
 
-  echo -e "\n${top_left}${p1_userhost}${p2_seperator}${p3_workdir}${COLOR_RESET}"	
+  echo -e "\n$(FG ${P_THEME[COL_C]})${top_left}${p1_userhost}${p2_seperator} ${p3_workdir}${COLOR_RESET}"	
 }
 
 function middle_block()
@@ -187,7 +187,7 @@ function middle_block()
 function right_block()
 {
   local time_disp="$(BG_FG ${P_THEME[COL_A]} ${P_THEME[COL_B]})⌚$(date +%H:%M)${COLOR_RESET}"
-  echo -e "${time_disp}$(FG ${P_THEME[COL_B]})\n${bottom_left}${horizontal}\$${COLOR_RESET}"
+  echo -e "${time_disp}$(FG ${P_THEME[COL_A]})\n$(FG ${P_THEME["COL_C"]})${bottom_left}${horizontal}➤${COLOR_RESET}"
 }
 
 function update_prompt() 

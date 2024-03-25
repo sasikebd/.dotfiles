@@ -119,6 +119,29 @@ function M.Setup()
   vim.api.nvim_set_keymap('n', '<leader>tjk', [[:%v/^<C-r><C-w>/-1j!]], { noremap = true })
   vim.api.nvim_set_keymap('v', '<leader>tjk', [[:v/^<C-r><C-w>/-1j!]], { noremap = true })
 
+  -- clip board copy paste
+  vim.api.nvim_set_keymap('n', '<leader>y', '"+y"', { noremap = true ,silent = true})
+  vim.api.nvim_set_keymap('v', '<leader>p', '"+p"', { noremap = true ,silent = true})
+
+  -- Tabular related mappings
+  vim.api.nvim_set_keymap('n', '<leader>ae', ":Tabularize /=<CR>", { noremap = true ,silent = true})
+  vim.api.nvim_set_keymap('v', '<leader>ae', ":Tabularize /=<CR>", { noremap = true ,silent = true})
+
+  vim.api.nvim_set_keymap('n', '<leader>a:', ":Tabularize /:<CR>", { noremap = true ,silent = true})
+  vim.api.nvim_set_keymap('v', '<leader>a:', ":Tabularize /:<CR>", { noremap = true ,silent = true})
+
+  vim.api.nvim_set_keymap('n', '<leader>al', ":Tabularize /,<CR>", { noremap = true ,silent = true})
+  vim.api.nvim_set_keymap('v', '<leader>al', ":Tabularize /,<CR>", { noremap = true ,silent = true})
+
+  vim.api.nvim_set_keymap('n', '<leader>as', ":Tabularize / ,<CR>", { noremap = true ,silent = true})
+  vim.api.nvim_set_keymap('v', '<leader>as', ":Tabularize / ,<CR>", { noremap = true ,silent = true})
+
+  vim.api.nvim_set_keymap('n', '<leader>add', ":Tabularize /-- ,<CR>", { noremap = true ,silent = true})
+  vim.api.nvim_set_keymap('v', '<leader>add', ":Tabularize /-- ,<CR>", { noremap = true ,silent = true})
+
+  vim.api.nvim_set_keymap('n', '<leader>ai', ":Tabularize /	<CR>", { noremap = ture, silent = ture })
+  vim.api.nvim_set_keymap('n', '<leader>ai', ":Tabularize /	<CR>", { noremap = ture, silent = ture })
+
   --#endregion  Text_Editing_Mappings
  
 end

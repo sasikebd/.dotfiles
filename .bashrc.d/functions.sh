@@ -178,28 +178,34 @@ function init_nvim_config()
 function tux()
 {
 
-  # window 1
-  tmux new-session -d -s dev_s -n nvim_max
+  #session 1
+  tmux new-session -d -s dev_s 
 
+    # window 1 - nvim
+    tmux new-window -t dev_s -n nvim_max
     # split the window in to multiple panes and start nvim in one
-    tmux send-keys -t dev_s:nvim_max.0 'nvim' Enter
-
+    tmux send-keys -t dev_s:nvim_max.0 'initlua' Enter
     #split pane horizontally and run another command in the new pane
     tmux split-window -h -t dev:nvim_max
     tmux send-keys -t dev_s:nvim_max.1 'cdtmux' Enter
 
-  # window 2
-  tmux new-window -t dev_s -n py
+    # window 2 - py
+    tmux new-window -t dev_s -n py
     #split the window horizontally
     tmux split-window -h -t dev_s:py
     tmux send-keys -t dev_s:py.0 'cdprog;nvim' Enter
-  #  #split right pane to have two vertical panes
+    #split right pane to have two vertical panes
     #tmux split-window -v -t dev_s:py
     tmux send-keys -t dev_s:py.1 'cdgit' Enter
 
-    #tmux split-window -v -t dev_s:py
+    # window 3 - kube
+    tmux new-window -t dev_s -n kube
+    #split the window horizontally
+    tmux split-window -h -t dev_s:kube
+    tmux send-keys -t dev_s:kube.0 'cdwork' Enter
+    tmux send-keys -t dev_s:kube.1 'cdwork' Enter
 
-  ##attach to the session 
+  #attach to the session 
   tmux attach-session -t dev_s
 }
 
